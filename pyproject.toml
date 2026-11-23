@@ -23,4 +23,5 @@ pythonpath = ["src"]
 
 [tool.coverage.run]
 branch = true
-source = ["course_schedule_checker"]
+relative_files = true
+source = ["src/course_schedule_checker"]
