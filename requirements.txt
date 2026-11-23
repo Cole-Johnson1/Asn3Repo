@@ -1,0 +1,12 @@
+# Build and test tools for the GitHub Actions Linux x86-64 Python 3.12 job.
+# The application itself has no third-party runtime dependencies.
+coverage==7.17.5 \
+    --hash=sha256:f3c892bf8861acd9e8fe18060672ad736d0ec983ad1f64c12eb0abd6cf17b02e \
+    --hash=sha256:6365cc9f34508faeaaf59ff82b45f6bbda0c823c731039edabc2bd8e774879a7
+iniconfig==2.3.1 --hash=sha256:9121e2c1fdb355232495be3194c8dfe87ccc2d5dee45947b78e68f499790d7a7
+packaging==26.3 --hash=sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c
+pluggy==1.7.0 --hash=sha256:7dd7b0d8832ba3cb632c306926ded123429211b83641b35dc5c41ad2d34f9bec
+pygments==2.21.0 --hash=sha256:2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9
+pytest==9.2.0 --hash=sha256:07acdcf88ec174f907dc01af70bf52d49b014bbab03faeeade31c96b18c2e588
+pytest-cov==7.1.0 --hash=sha256:a0461110b7865f9a271aa1b51e516c9a95de9d696734a2f71e3e78f46e1d4678
+setuptools==84.2.1 --hash=sha256:ca140b45d5325a9478f880e351484f62fef15f336462e449ca0c03c873d589c2
