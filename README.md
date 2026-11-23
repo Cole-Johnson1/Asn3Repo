@@ -7,16 +7,16 @@ This small command-line project checks a student's course schedule for overlappi
 - Python 3.10 or newer
 - Install development tools with `python -m pip install -e ".[test]"`
 
-## Run
+## Run from the folder that contains your schedule
 
 ```powershell
-python -m course_schedule_checker data/sample_schedule.json
+course-schedule-checker data/sample_schedule.json
 ```
+
+Give the command a JSON file inside the current folder or one of its subfolders.  If your schedule is elsewhere, change to its containing folder first.  The command returns 0 for a valid schedule without overlaps, 1 for overlaps, and 2 for a usage or input error.  Meetings must end later on the same day.
 
 ## Test and coverage
 
 ```powershell
-python -m pytest --cov=course_schedule_checker --cov-report=xml:coverage.xml
+python -m pytest --cov --cov-report=term-missing --cov-report=xml:coverage.xml
 ```
-
-The initial baseline deliberately has areas to investigate during the static-analysis exercise.  The first report should be based on the actual baseline scan and test results, then improvements should be made in later commits.

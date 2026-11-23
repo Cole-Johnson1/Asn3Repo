@@ -13,13 +13,28 @@ def _to_minutes(value):
 
 
 def load_courses(file_path):
-    """Read course meetings from a JSON file."""
-    try:
-        with Path(file_path).open("r", encoding="utf-8") as schedule_file:
-            return json.load(schedule_file)
-    except Exception as error:
-        print("Unable to load schedule:", error)
-        return []
+    """Read a schedule JSON file inside the current working directory."""
+    schedule_root = Path.cwd().resolve()
+    schedule_path = (schedule_root / file_path).resolve()
+    if not schedule_path.is_relative_to(schedule_root):
+        raise ValueError("The schedule must be inside the current working folder.")
+    if schedule_path.suffix.lower() != ".json":
+        raise ValueError("The schedule must be a JSON file.")
+
+    with schedule_path.open("r", encoding="utf-8") as schedule_file:
+        courses = json.load(schedule_file)
+
+    if not isinstance(courses, list):
+        raise ValueError("The schedule must contain a JSON list of meetings.")
+    for meeting in courses:
+        if not isinstance(meeting, dict) or not all(
+            isinstance(meeting.get(field), str)
+            for field in ("course", "day", "start", "end")
+        ):
+            raise ValueError("Each meeting needs course, day, start and end strings.")
+        if _to_minutes(meeting["start"]) >= _to_minutes(meeting["end"]):
+            raise ValueError("A meeting's end time must be after its start time.")
+    return courses
 
 
 def find_conflicts(courses):
@@ -42,10 +57,15 @@ def find_conflicts(courses):
 def main():
     """Run the schedule checker from the command line."""
     if len(sys.argv) != 2:
-        print("Usage: course-schedule-checker <schedule.json>")
+        print("Usage: course-schedule-checker <schedule.json>", file=sys.stderr)
         return 2
 
-    courses = load_courses(sys.argv[1])
+    try:
+        courses = load_courses(sys.argv[1])
+    except (OSError, ValueError) as error:
+        print(f"Unable to load schedule: {error}", file=sys.stderr)
+        return 2
+
     conflicts = find_conflicts(courses)
     if conflicts:
         for first_course, second_course in conflicts:
