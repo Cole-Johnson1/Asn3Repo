@@ -1,0 +1,20 @@
+[
+  {
+    "course": "CSCN73010",
+    "day": "Monday",
+    "start": "09:00",
+    "end": "10:30"
+  },
+  {
+    "course": "CSCN72040",
+    "day": "Monday",
+    "start": "11:00",
+    "end": "12:30"
+  },
+  {
+    "course": "CSCN72050",
+    "day": "Tuesday",
+    "start": "13:00",
+    "end": "14:00"
+  }
+]
